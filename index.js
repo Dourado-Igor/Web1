@@ -1,15 +1,23 @@
 const express = require('express')
 const path = require(`path`);
+var bodyparser = require("body-parser");
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => {
-    let options = root;path,join (_dirname);
+app.use (bodyparser.urlencoded{(extended:false)})
 
-  res.sendFile("/views/index.html");
+app.get('/', (req, res) => {
+    let options = rootpath.join (_dirname);
+
+  res.sendFile("/views/index.html",options);
+})
+app.post("/",(req,res) => {
+console.log(req.body);
+res.send ("recibiendo datos..");
+
 })
 app.get(`/hola`,(req,res) =>{
-   res.send(`Bien-Venido`) 
+   res.send(`Bien-Venido`);
 })
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
