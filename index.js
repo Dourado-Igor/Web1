@@ -23,15 +23,19 @@ app.post("/",(req,res)=>{
         database:'biblioteca'
     });
     conn.connect();
-    var sql=`insert into libros
-     (codigo,titulo,genero)
-     values ('${req.body.codigo}','${req.body.titulo}','${req.body.genero}')`;
-    conn.query(sql,(err,result,field)=>{
+    var libro={
+        'codigo':req.body.codigo,
+        'titulo':req.body.titulo,
+        'genero':req.body.genero
+    }
+    var sql=`insert into libros set ?`;
+    conn.query(sql,libro,(err,result,field)=>{
         if(err){
             console.log(err);
+            res.send("Error conectando a la bbdd");
         }
         console.log(result)
-        res.send("recibiendo datos..")
+        res.redirect("/");
         conn.end();
     })
      
